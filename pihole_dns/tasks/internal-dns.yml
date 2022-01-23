@@ -1,0 +1,17 @@
+---
+- name: Add internal hosts for dns service.
+  copy:
+    src: home_lan.conf
+    dest: /etc/unbound/unbound.conf.d/home_lan.conf
+    backup: yes
+    force: yes
+    mode: 0644
+    owner: root
+    group: root
+  become: yes
+  tags: 
+    - setup 
+    - update
+  notify:
+    - restart unbound
+...

@@ -1,0 +1,8 @@
+---
+- name: Import python_deb.yml for Python
+  import_tasks: python_deb.yml
+
+- name: Import tools_deb.yml for dev tools.
+  import_tasks: tools_deb.yml
+
+...

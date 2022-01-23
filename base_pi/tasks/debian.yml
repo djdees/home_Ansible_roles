@@ -1,0 +1,26 @@
+---
+- name: Update Apt cache
+  apt:
+    update-cache=yes
+  become: yes
+
+- name: Auto remove unused packages.
+  apt:
+    autoremove=yes
+  register: apt_result
+  changed_when: "'packages will be REMOVED' in apt_result.stdout"
+  become: yes
+
+- name: Add git
+  apt:
+    name: git
+    state: present
+  become: yes
+
+- name: Add Python3
+  apt:
+    name: python3
+    state: present
+  become: yes
+
+...

@@ -1,0 +1,30 @@
+---
+# Change to home directory of primary user.
+#   pi on Raspberry Pi's
+#   djdees on vms.
+
+- name: Copy bashrc to home directory
+  copy:
+    src: bashrc
+    dest: "/home/{{ ansible_user }}/.bashrc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_group }}"
+    mode: 0744
+
+- name: Copy bash_profile to home directory.
+  copy:
+    src: bash_profile
+    dest: "/home/{{ ansible_user }}/.bash_profile"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_group }}"
+    mode: 0744
+
+- name: Copy vimrc to home directory.
+  copy:
+    src: vimrc
+    dest: "/home/{{ ansible_user }}/.vimrc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_group }}"
+    mode: 0744
+
+...

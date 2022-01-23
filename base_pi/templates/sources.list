@@ -1,0 +1,4 @@
+# Mirror list: https://www.raspbian.org/RaspbianMirrors
+deb {REPOSITORY_URL} buster main contrib non-free rpi
+# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+deb-src {REPOSITORY_URL} buster main contrib non-free rpi

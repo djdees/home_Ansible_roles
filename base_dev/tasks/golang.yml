@@ -1,0 +1,53 @@
+---
+# Note: Raspberry Pis with Raspian return armv7l - but we use the armv6 packages.
+# Both are for 32bit, which Raspian does even on 64Bit for backwards compatability.
+
+- name: Set golang file
+  set_fact:
+    go_file: "go{{ golang_version }}.{{ golang_arch[ansible_machine] }}"
+
+- name: Set golang download path - based on architecture.
+  set_fact:
+    go_download: "{{ golang_base_url }}/go{{ golang_version }}.{{ golang_arch[ansible_machine] }}"
+
+    #- name: Download tar.gz to /tmp
+    #get_url:
+    #url: "{{ go_download }}"
+    #dest: /tmp
+    #mode: '0440'
+    #checksum: "sha256:{{ golang_checksum[ansible_machine] }}"
+
+- name: Remove /usr/local/go
+  file: 
+    path: /usr/local/go
+    state: absent
+  become: yes
+
+- name: extract tar.gz to /usr/local
+  unarchive:
+    #src: "/tmp/{{ go_file }}"
+    src: "{{ go_download }}"
+    remote_src: yes
+    dest: /usr/local/
+    mode: '0755'
+  become: yes
+
+- name: Add GO_PATH to the .bashrc of the inventory user
+  lineinfile:
+    path: "/home/{{ ansible_user }}/.bashrc"
+    insertafter: '^# Path Adjustments'
+    line: 'GO_PATH=/usr/local/go/bin'
+    state: present
+
+- name: Export updated PATH
+  lineinfile:
+    path: "/home/{{ ansible_user }}/.bashrc"
+    insertafter: '^GO_PATH='
+    line: 'export PATH=${PATH}:${GO_PATH}'
+    state: present
+
+
+    #- name: Add GO_PATH to the PATH of the inventory user and export it.
+
+
+...

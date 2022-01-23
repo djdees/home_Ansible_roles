@@ -1,0 +1,73 @@
+---
+- name: install CUPS
+  apt:
+          name: cups
+          state: latest
+          update_cache: yes
+          autoremove: yes
+          autoclean: yes
+  become: yes
+
+- name: Install custom cupsd.conf file
+  template:
+          src: cupsd.j2
+          dest: /etc/cups/cupsd.conf
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+  become: yes
+
+- name: Install custom cups-browsed.conf file
+  template:
+          src: cups-browsed.j2
+          dest: /etc/cups/cups-browsed.conf
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+  become: yes
+
+- name: Install custom cups-files.conf file
+  template:
+          src: cups-files.j2
+          dest: /etc/cups/cups-files.conf
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+  become: yes
+
+- name: Install hplip package
+  apt:
+          name: hplip
+          state: latest
+          update_cache: yes
+          autoremove: yes
+          autoclean: yes
+  become: yes
+
+- name: Install hplip-data package
+  apt:
+          name: hplip-data
+          state: latest
+          update_cache: yes
+          autoremove: yes
+          autoclean: yes
+  become: yes
+
+- name: Install hpijs-ppd package
+  apt:
+          name: hpijs-ppds
+          state: latest
+          update_cache: yes
+          autoremove: yes
+          autoclean: yes
+  become: yes
+
+- name: Restart cups
+  command: echo "Restarting CUPS"
+  notify: "restart cups"
+  become: yes
+
+...

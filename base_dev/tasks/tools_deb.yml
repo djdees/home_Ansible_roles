@@ -1,0 +1,43 @@
+---
+- name: Update Apt cache
+  apt:
+    update-cache=yes
+  become: yes
+
+- name: Update Apt to latest.
+  apt:
+    upgrade=dist
+  become: yes
+
+- name: Auto remove unused packages.
+  apt:
+    autoremove=yes
+  register: apt_result
+  changed_when: "'packages will be REMOVED' in apt_result.stdout"
+  become: yes
+
+- name: Add git
+  apt:
+    name: git
+    state: present
+  become: yes
+
+- name: Add tmux
+  apt:
+    name: tmux
+    state: present
+  become: yes
+
+- name: Add yamllint 
+  apt:
+    name: yamllint
+    state: present
+  become: yes
+
+- name: Add jq for CLI JSON parsing 
+  apt:
+    name: jq
+    state: present
+  become: yes
+
+...

@@ -1,0 +1,59 @@
+---
+# Reference URL: https://www.linux-magazine.com/Online/Features/AirPrint
+# Reference URL: https://wiki.debian.org/CUPSAirPrint
+# The cool script below, is really old python and now throws errors with newer 
+# version. Myabe I'll fix it one day.
+# Supporting script: https://github.com/tjfontaine/airprint-generate/archive/master.zip
+- name: Add avahi-utils
+  apt:
+          name: avahi-utils
+          state: latest
+          update_cache: yes
+          autoremove: yes
+          autoclean: yes
+  become: yes
+
+- name: Install custom avahi-daemon.conf file
+  template:
+          src: avahi-daemon.j2
+          dest: /etc/avahi/avahi-daemon.conf
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+  become: yes
+
+- name: Install custom avahi hosts file
+  template:
+          src: avahi.hosts.j2
+          dest: /etc/avahi/hosts
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+  become: yes
+
+- name: Deploy HP_LaserJet_5MP service file.
+  copy:
+          src: HP_LaserJet_5MP.service
+          dest: /etc/avahi/services/HP_LaserJet_5MP.service
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+
+- name: Deploy HP_OfficeJet_5600_series service file.
+  copy:
+          src: HP_Officejet_5600_Series.service
+          dest: /etc/avahi/services/HP_Officejet_5600_Series.service
+          owner: root
+          group: root
+          mode: 0644
+          backup: yes
+
+- name: Restart avahi
+  command: echo "Restarting Avahi"
+  notify: "restart avahi-daemon"
+  become: yes
+
+...

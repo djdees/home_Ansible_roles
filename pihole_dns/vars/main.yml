@@ -1,0 +1,11 @@
+---
+ROOT_HINTS_URL: https://www.internic.net/domain/named.root
+UNBOUND_PORT: 5335
+DO_IP4: yes
+DO_IP6: no
+PREFER_IP6: no
+DO_UDP: yes
+DO_TCP: yes
+NUM_THREADS: 1
+SO_RCVBUF: 1m
+...

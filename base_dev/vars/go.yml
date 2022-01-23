@@ -1,0 +1,15 @@
+---
+golang_version: 1.15.8
+golang_base_url: https://golang.org/dl
+golang_arch:
+  "armv7l": "linux-armv6l.tar.gz"
+  "armv6": "linux-armv6l.tar.gz"
+  "armv8": "linux-arm64.tar.gz"
+  "x86_64": "linux-amd64.tar.gz"
+golang_checksum:
+  "armv7l": "708c398cb9e5029cfd5b654370978bf0e797d4d4a71153c06c7378db7e249a53"
+  "armv6": "708c398cb9e5029cfd5b654370978bf0e797d4d4a71153c06c7378db7e249a53"
+  "armv8": "0e31ea4bf53496b0f0809730520dee98c0ae5c530f3701a19df0ba0a327bf3d2"
+  "x86_64": "d3379c32a90fdf9382166f8f48034c459a8cc433730bc9476d39d9082c94583b"
+
+...

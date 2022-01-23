@@ -1,0 +1,5 @@
+---
+- name: Import dot_files commands.
+  import_tasks: dot_files.yml
+
+...

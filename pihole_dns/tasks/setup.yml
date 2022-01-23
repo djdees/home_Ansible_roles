@@ -1,0 +1,35 @@
+---
+- name: Install Unbound
+  package:
+    name: unbound
+    state: present
+    use: auto 
+  become: yes
+  tags: 
+    - setup
+
+- name: Add the conf file
+  template:
+    src: pi-hole.conf.jinja
+    dest: /etc/unbound/unbound.conf.d
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  become: yes
+  tags: 
+    - setup
+
+- name: Enable the unbound service
+  systemd:
+    name: unbound
+    enabled: yes
+    daemon_reload: yes
+    masked: no
+  become: yes
+  tags: 
+    - setup
+  notify: 
+    - restart unbound
+
+...

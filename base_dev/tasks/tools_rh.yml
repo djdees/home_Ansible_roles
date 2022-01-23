@@ -1,0 +1,7 @@
+---
+- name Add tmux
+  yum:
+    name: tmux.x86_64
+    state: present
+
+...

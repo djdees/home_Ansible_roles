@@ -1,0 +1,28 @@
+---
+- name Add Python2
+    name: tmux.x86_64
+    state: present
+    tags: python2 python
+
+- name Add Pip for Python2
+    name: tmux.x86_64
+    state: present
+    tags: python2 python
+
+- name Add Python3
+    name: tmux.x86_64
+    state: present
+    tags: python3 python
+
+- name Add Pip for Python3
+    name: python3-pip
+    state: present
+    tags: python3 python
+
+# Add system switch to make P3 the default
+#
+# python3-pylint
+# python3 pycodestyle
+# python2-pylint
+# python2 pycodestyle
+...

@@ -1,0 +1,9 @@
+---
+#- name: install CUPS
+#  dnf:
+#          name: cups
+#          state: latest
+#          update_cache: yes
+#          autoremove: yes
+#  become: yes
+...

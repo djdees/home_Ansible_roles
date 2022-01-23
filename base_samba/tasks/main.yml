@@ -1,0 +1,8 @@
+---
+- name: Import redhat.yml, if needed.
+  import_tasks: redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+- name: Import debian.yml, if needed.
+  import_tasks: debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+...

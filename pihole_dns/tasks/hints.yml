@@ -1,0 +1,25 @@
+---
+- name: Get current root hints file
+  get_url:
+    dest: /tmp
+    force: yes
+    url: "{{ ROOT_HINTS_URL }}"
+  tags: 
+    -update 
+    -setup
+
+- name: Place the root hints file.
+  copy:
+    src: /tmp/named.root
+    dest: /var/lib/unbound/root.hints
+    remote_src: yes
+    owner: pi
+    group: pi
+  become: yes
+  notify: 
+    - restart unbound
+  tags: 
+    -update 
+    -setup
+
+...

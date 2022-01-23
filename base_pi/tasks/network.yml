@@ -1,0 +1,50 @@
+---
+- name: Register default route presence
+  shell: route | grep default | awk '{print $1}' | wc -l
+  register: default_present
+  become: yes
+
+- name: Add default route to local gateway
+  shell: route add default gw 192.168.1.5
+  become: yes
+  when: default_present['stdout'] == "0"
+
+- name: Add US localized wpa_supplicant.conf
+  copy:
+    src: wpa_supplicant.conf
+    dest: /etc//wpa_supplicant/wpa_supplicant.conf
+    backup: yes
+    mode: 0644
+    owner: root
+    group: root
+  become: yes
+  tags:
+    - setup
+
+- name: Run rfkill status
+  command: /usr/sbin/rfkill list wlan
+  changed_when: False
+  check_mode: no
+  register: rfkill_result
+
+- name: Unblock wifi
+  command: rfkill unblock wifi
+  when: "'Soft blocked: yes' in rfkill_result.stdout"
+  become: yes
+
+- name: register rfkill wlan files
+  find: 
+    paths: "/var/lib/systemd/rfkill"
+    patterns: "platform*wlan"
+    recurse: no
+    file_type: file
+  register: wlan_files
+
+- name: Set rfkill wlan files to zero
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^1$'
+    replace: '0'
+  with_items: "{{ wlan_files.files }}"
+  become: yes
+...

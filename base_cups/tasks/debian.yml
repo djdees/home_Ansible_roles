@@ -1,0 +1,7 @@
+---
+- name: Import CUPS Installation/Configuration.
+  import_tasks: debian_cups.yml
+
+- name: Configure Avahi Daemon for AirPrint.
+  import_tasks: debian_avahi.yml
+...

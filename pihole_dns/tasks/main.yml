@@ -1,0 +1,11 @@
+---
+- name: Import setup.yml
+  import_tasks: setup.yml
+
+- name: Import hints.yml
+  import_tasks: hints.yml
+
+- name: Import internal-dns.yml
+  import_tasks: internal-dns.yml
+
+...

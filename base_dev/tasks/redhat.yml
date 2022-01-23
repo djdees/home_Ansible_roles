@@ -1,0 +1,8 @@
+---
+- name: Import python_rh.yml for Python
+  import_tasks: python_rh.yml
+
+- name: Import tools_rh.yml for dev tools.
+  import_tasks: tools_rh.yml
+
+...

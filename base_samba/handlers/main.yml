@@ -1,0 +1,9 @@
+---
+- name: restart SAMBA
+  service:
+          name: smbd
+          state: restarted
+  become: yes
+  listen: "restart samba"
+
+...
