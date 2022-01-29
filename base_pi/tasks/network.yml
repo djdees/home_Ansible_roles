@@ -9,6 +9,17 @@
   become: yes
   when: default_present['stdout'] == "0"
 
+- name: Add local dhcpcd.conf file.
+  template:
+    src: dhcpcd.conf
+    dest: /etc/dhcpcd.conf
+    owner: root
+    group: root
+    backup: yes
+  become: yes
+  tags:
+    - setup
+
 - name: Add US localized wpa_supplicant.conf
   copy:
     src: wpa_supplicant.conf
@@ -33,7 +44,7 @@
   become: yes
 
 - name: register rfkill wlan files
-  find: 
+  find:
     paths: "/var/lib/systemd/rfkill"
     patterns: "platform*wlan"
     recurse: no
