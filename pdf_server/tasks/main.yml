@@ -1,0 +1,14 @@
+---
+- name: Directory Setup
+  ansible.builtin.file:
+    path: /data/www/html
+    state: directory
+    owner: apache
+    group: apache
+    mode: '0775'
+- name: Install Httpd Server
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: true
+...
