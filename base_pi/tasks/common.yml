@@ -1,6 +1,6 @@
 ---
 - name: Register current time zone.
-  #shell: timedatectl -a | grep zone | awk '{print $3}'
+  # shell: timedatectl -a | grep zone | awk '{print $3}'
   shell: timedatectl show | grep ^Timezone | awk 'BEGIN {FS = "="i}; {print $2}'
   register: default_timezone
   become: yes
@@ -59,7 +59,7 @@
     owner: root
     group: root
     state: directory
-  become: yes  
+  become: yes
   tags:
     - setup
 
@@ -75,8 +75,6 @@
   become: yes
   notify:
     - restart systemd-timesyncd.service
-  tags:
-    - setup
   tags:
     - setup
 
