@@ -1,0 +1,33 @@
+---
+- name: Download Telegraf tar bundle
+  get_url:
+    url: '{{TELEGRAF_SOURCE}}/{{TELEGRAPH_BUNDLE}}'
+    dest: /etc/{{TELEGRAF_BUNDLE}}
+    owner: telegraf
+    group: telegraf
+    mode: '0440'
+
+- name: Extract Telgraf bundle
+  unarchive:
+    src: /tmp/
+    dest: /tmp/
+    owner: telegraf
+    group: telegraf
+
+- name: Create telegraf group
+  group: telegraf
+  system: no
+  state: present
+
+- name: Create telgraf user
+  user:
+    name: telegraf
+    group: telegraf
+    shell: /bin/false
+    create_home: yes
+    comment: telegraf service account
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+    state: present
+...

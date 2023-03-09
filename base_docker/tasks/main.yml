@@ -1,0 +1,12 @@
+---
+- name: Import Pre-installation tasks.
+  import_tasks: preinstall.yml
+
+# - name: Import basic network commands
+#   import_tasks: network.yml
+
+- name: Import apt-setup.yml, if needed.
+  import_tasks: apt-setup.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+
+...

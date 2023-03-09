@@ -1,0 +1,6 @@
+---
+DEB_REPOSITORY_URL: http://raspbian.raspberrypi.org/raspbian/
+TELEGRAF_SOURCE: https://dl.influxdata.com/telegraf/releases/
+TELEGRAF_BUNDLE: telegraf-1.21.3_linux_amd64.tar.gz
+TELEGRAF_LANDING: /tmp
+...

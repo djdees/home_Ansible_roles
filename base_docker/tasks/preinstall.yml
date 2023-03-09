@@ -1,0 +1,22 @@
+---
+- name: Remove older docker package
+  ansible.builtin.package:
+    name: docker
+    state: absent
+- name: Remove older docker-engine package
+  ansible.builtin.package:
+    name: docker-engine
+    state: absent
+- name: Remove older docker.io
+  ansible.builtin.package:
+    name: docker.io
+    state: absent
+- name: Remove older containerd
+  ansible.builtin.package:
+    name: containerd
+    state: absent
+- name: Remove older runc
+  ansible.builtin.package:
+    name: runc
+    state: absent
+...
